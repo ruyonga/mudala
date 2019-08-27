@@ -4,16 +4,18 @@ defmodule MudalaWeb.HomepageTest do
   use Hound.Helpers
 
   hound_session()
+
   setup do
     ## GIVEN ##
     # There are two products Apple and Tomato priced 100 and 50 respectively
     # Where Apple being the only seasonal product
     alias Mudala.Repo
     alias Mudala.Catalog.Product
-    Repo.insert %Product{name: "Tomato", price: 50, is_seasonal: false}
-    Repo.insert %Product{name: "Apple", price: 100, is_seasonal: true}
+    Repo.insert(%Product{name: "Tomato", price: 50, is_seasonal: false})
+    Repo.insert(%Product{name: "Apple", price: 100, is_seasonal: true})
     :ok
   end
+
   test "presence of featured products" do
     ## GIVEN##
     # There are two products Apple and Tomato priced at 100 and 50 respectively
@@ -36,12 +38,11 @@ defmodule MudalaWeb.HomepageTest do
 
     assert product_name == "Apple"
 
-    #And I expect its price to be displayed on the screen
+    # And I expect its price to be displayed on the screen
     assert product_price == "100"
 
-    #And I ext that Tomato is not present on the screen
+    # And I ext that Tomato is not present on the screen
 
     refute page_source() =~ "Tomato"
-
   end
 end

@@ -1,4 +1,3 @@
 defmodule MudalaWeb.RegistrationView do
-    use MudalaWeb, :view
-
+  use MudalaWeb, :view
 end

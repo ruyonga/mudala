@@ -6,11 +6,10 @@ config :mudala, MudalaWeb.Endpoint,
   http: [port: 4001],
   server: true
 
-  config :hound, driver: "phantomjs"
+config :hound, driver: "phantomjs"
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
 
 # Configure your database
 config :mudala, Mudala.Repo,

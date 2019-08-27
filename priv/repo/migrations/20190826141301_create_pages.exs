@@ -9,6 +9,5 @@ defmodule Mudala.Repo.Migrations.CreatePages do
 
       timestamps()
     end
-
   end
 end

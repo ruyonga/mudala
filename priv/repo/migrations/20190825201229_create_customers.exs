@@ -3,6 +3,7 @@ defmodule Mudala.Repo.Migrations.CreateCustomers do
 
   def change do
     execute "CREATE EXTENSION IF NOT EXISTS citext"
+
     create table(:customers) do
       add :name, :string
       add :email, :citext

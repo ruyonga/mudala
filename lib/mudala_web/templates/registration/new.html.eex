@@ -1,6 +1,13 @@
 <h1>Register Account</h1>
 
-<%= form_for @changest, "/register", [as: :registration, id: "registration-form"], fn f -> %>
+<%= form_for @changeset, Routes.registration_path(@conn, :create), [as: :registration, id: "registration-form"], fn f -> %>
+    <%= if @changeset.action do %>
+      <div id="form-error" class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+
     <div class="form-for">
         <%= label f, :name, class: "control-label" %>
         <%= text_input f, :name, class: "form-control" %>
@@ -20,7 +27,7 @@
 
   <div class="form-group">
     <%= label f, :residence_area, "Area of Residence", class: "control-label" %>
-    <%= text_input f, :residence_area, class: "form-control" %>
+    <%= select f, :residence_area,@residence_areas, prompt: "Choose your residence area", class: "form-control" %>
     <%= error_tag f, :residence_area %>
   </div>
 

@@ -1,10 +1,8 @@
 defmodule Mudala.Catalog.Product do
-
-  #defstruct [:name, :price, :is_seasonal, :category]
+  # defstruct [:name, :price, :is_seasonal, :category]
   use Ecto.Schema
 
   schema "products" do
-
     field :image, :string
     field :is_seasonal, :boolean, default: false
     field :name, :string
@@ -15,5 +13,4 @@ defmodule Mudala.Catalog.Product do
 
     timestamps()
   end
-
 end

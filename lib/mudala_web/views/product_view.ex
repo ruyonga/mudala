@@ -1,3 +1,3 @@
 defmodule MudalaWeb.ProductView do
-    use MudalaWeb, :view
+  use MudalaWeb, :view
 end
