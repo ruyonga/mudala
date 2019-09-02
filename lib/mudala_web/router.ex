@@ -7,7 +7,9 @@ defmodule MudalaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug MuladaWeb.Plugs.LoadCustomer
+    plug MudalaWeb.Plugs.LoadCustomer
+    plug MudalaWeb.Plug.FetchCart
+
   end
 
   pipeline :api do

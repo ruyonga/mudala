@@ -1,4 +1,4 @@
-defmodule MuladaWeb.Plugs.LoadCustomer do
+defmodule MudalaWeb.Plugs.LoadCustomer do
   import Plug.Conn
   alias Mudala.CRM
 
