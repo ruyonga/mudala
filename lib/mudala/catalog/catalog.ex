@@ -2,6 +2,8 @@ defmodule Mudala.Catalog do
   alias Mudala.Catalog.Product
   alias Mudala.Repo
 
+  def get_product!(id), do: Product |> Repo.get!(id)
+
   def list_products do
     Product
     |> Repo.all()

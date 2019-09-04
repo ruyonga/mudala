@@ -3,7 +3,7 @@ defmodule MudalaWeb.Plugs.FetchCartTest do
   alias Mudala.Sales.Order
 
 test "create and set cart on first visit"  do
-      conn = get build_conn()
+      conn = get build_conn(), "/"
 
       cart_id = get_session(conn, :cart_id)
       assert %Order{status: "In Cart"} = conn.assigns.cart

@@ -37,7 +37,7 @@ defmodule MudalaWeb.Acceptance.SessionTest do
 
       ## THEN ##
 
-      assert current_path() == '/'
+      assert current_path() == "/"
       message = find_element(:class, "alert-info")
       |> visible_text()
 
