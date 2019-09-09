@@ -3,6 +3,10 @@ defmodule MudalaWeb.CartController do
 
   alias Mudala.Sales
 
+  def show(conn, _params) do
+    cart = conn.assigns.cart
+    render conn, "show.html", cart: cart
+  end
 
   def add(conn, %{"cart" => cart_params}) do
     cart = conn.assigns.cart
