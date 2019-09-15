@@ -20,4 +20,18 @@ defmodule MudalaWeb.CartController do
         |> redirect(to: Routes.page_path(conn, :index))
     end
   end
+
+  def update(conn, %{"order" => cart_params}) do
+    cart = conn.assigns.cart
+    case Sales.update_cart(cart, cart_params) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Cart updated successfully")
+        |> redirect(to: Routes.cart_path(conn, :show))
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "Error updating cart")
+        |> redirect(to: Routes.cart_path(conn, :show))
+    end
+  end
 end

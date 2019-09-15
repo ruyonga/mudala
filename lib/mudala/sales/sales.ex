@@ -35,4 +35,11 @@ defmodule Mudala.Sales do
   def create_cart do
     %Order{status: "In Cart"}|> Repo.insert!()
   end
+
+  def confirm_order(%Order{} = order, attrs) do
+    attrs =  Map.put(attrs, "status", "Confirmed")
+    order
+    |> Order.checkout_changeset(attrs)
+    |> Repo.update()
+  end
 end

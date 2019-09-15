@@ -44,6 +44,8 @@ defmodule MudalaWeb.Router do
     # Add all routes that do require authentication
     get "/logout", SessionController, :delete
     get "/checkout", CheckoutController, :edit
+    put "/checkout/confirm", CheckoutController, :update
+
   end
 
 
