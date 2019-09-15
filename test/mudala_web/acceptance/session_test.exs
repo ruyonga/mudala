@@ -17,7 +17,7 @@ defmodule MudalaWeb.Acceptance.SessionTest do
       "residence_area" => "Area 1",
       "phone" => "1111"
     }
-    {:ok, _} = CRM.create_customer(valid_attr)
+    {:ok, _j} = CRM.create_customer(valid_attr)
   end
 
   test "successful login for valid credentials" do
@@ -25,7 +25,7 @@ defmodule MudalaWeb.Acceptance.SessionTest do
       navigate_to("/login")
 
       form  = find_element(:id, "session-form")
-      find_within_element(form,:name, "session[email]")
+      find_within_element(form, :name, "session[email]")
       |> fill_field("john@example.com")
 
       find_within_element(form, :name, "session[password]")
@@ -37,7 +37,7 @@ defmodule MudalaWeb.Acceptance.SessionTest do
 
       ## THEN ##
 
-      assert current_path() == '/'
+      assert current_path() == "/"
       message = find_element(:class, "alert-info")
       |> visible_text()
 
