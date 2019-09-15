@@ -12,12 +12,14 @@ defmodule Mudala.Sales.LineItem do
     field :quantity,  :integer
     field :unit_price, :decimal
     field :total, :decimal
+    field :delete, :boolean, virtual: true
   end
 
 
 def changeset(%LineItem{} = line_item, attrs) do
   line_item
-    |> cast(attrs, [:product_id, :product_name, :pack_size, :quantity, :unit_price, :total])
+    |> cast(attrs, [:product_id, :product_name, :pack_size, :quantity, :unit_price, :total, :delete])
+    |> set_delete
     |> set_product_details
     |> set_total
     |> validate_required([:product_id, :product_name, :pack_size, :quantity, :unit_price])
@@ -40,5 +42,13 @@ defp set_total(changeset) do
   unit_price = get_field(changeset, :unit_price)
   changeset
   |> put_change(:total, Decimal.mult(unit_price, quantity))
+end
+
+defp set_delete(changeset) do
+  if get_change(changeset, :delete) do
+    %{changeset| action: :delete}
+  else
+    changeset
+  end
 end
 end

@@ -1,4 +1,4 @@
-<div class="product thumbnail">
+<div class="product">
   <div class="caption">
     <span class="text-muted pull-right"><%= @product.pack_size %></span>
     <h2>

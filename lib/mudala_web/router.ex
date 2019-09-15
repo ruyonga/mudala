@@ -7,30 +7,45 @@ defmodule MudalaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug MudalaWeb.Plugs.LoadCustomer
-    plug MudalaWeb.Plug.FetchCart
-
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/", MudalaWeb do
-    pipe_through :browser
+  pipeline :frontend do
+    # Add plugs related to frontend
+    plug MudalaWeb.Plugs.LoadCustomer
+    plug MudalaWeb.Plug.FetchCart
+  end
 
-    get "/", PageController, :index
-    get "/categories/:name", CategoryController, :show
+  # Unauthenticated scope
+  scope "/", MudalaWeb do
+    pipe_through [:browser, :frontend]
+    # Add all routes that don't require authentication
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
     get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create
 
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
-    get "/logout", SessionController, :delete
+    get "/", PageController, :index
+    get "/categories/:name", CategoryController, :show
 
-    post "/cart", CartController, :add
     get "/cart", CartController, :show
+    post "/cart", CartController, :add
+    patch "/cart", CartController, :update
+    put "/cart", CartController, :update
   end
+
+
+  # Authenticated scope
+  scope "/", MudalaWeb do
+    pipe_through [:browser, :frontend, MudalaWeb.Plugs.AuthenticateCustomer]
+    # Add all routes that do require authentication
+    get "/logout", SessionController, :delete
+    get "/checkout", CheckoutController, :edit
+  end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", MudalaWeb do
