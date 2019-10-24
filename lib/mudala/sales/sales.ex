@@ -11,7 +11,8 @@ defmodule Mudala.Sales do
       product_id: String.to_integer(cart_params["product_id"]),
       quantity: String.to_integer(cart_params["quantity"])
     }
-    existing_line_items = existing_line_items |> Enum.map(&Map.from_struct/1)
+    existing_line_items = existing_line_items
+                          |> Enum.map(&Map.from_struct/1)
 
     attrs = %{line_items: [new_item | existing_line_items]}
     update_cart(cart, attrs)
@@ -28,18 +29,35 @@ defmodule Mudala.Sales do
   end
   def get_cart(id) do
     Order
-     |> Repo.get_by(id: id, status: "In Cart")
+    |> Repo.get_by(id: id, status: "In Cart")
   end
 
 
+  def get_order(customer_id) do
+    # Order
+    #  |> Repo.get_by(id: id)
+  end
+
   def create_cart do
-    %Order{status: "In Cart"}|> Repo.insert!()
+    %Order{status: "In Cart"}
+    |> Repo.insert!()
   end
 
   def confirm_order(%Order{} = order, attrs) do
-    attrs =  Map.put(attrs, "status", "Confirmed")
+    attrs = Map.put(attrs, "status", "Confirmed")
     order
     |> Order.checkout_changeset(attrs)
     |> Repo.update()
+  end
+
+  def get_orders(customer_id) do
+IO.inspect(customer_id)
+    Order
+    |> Repo.get_by(customer_id: customer_id)
+    |> Enum.reduce([], fn order,x  ->
+                x ++  order.line_items
+
+          end)
+
   end
 end
