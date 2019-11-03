@@ -12,6 +12,9 @@ defmodule MudalaWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+  pipeline :admin do
+    plug MudalaWeb.Plugs.AdminLayout
+  end
 
   pipeline :frontend do
     # Add plugs related to frontend
@@ -52,7 +55,15 @@ defmodule MudalaWeb.Router do
     resources "/tickets", TicketController
 
   end
+  #Admin user
+  scope "/admin", MudalaWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin]
 
+    resources "/users", UserController
+    get "/login", SessionController, :new
+    post "/sendlink", SessionController, :send_link
+    get "/magiclink", SessionController, :create
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", MudalaWeb do
