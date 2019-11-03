@@ -1,0 +1,27 @@
+<h1>Listing Tickets</h1>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Message</th>
+      <th>Status</th>
+      <th>Action </th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ticket <- @tickets do %>
+    <tr>
+      <td><%= ticket.subject %></td>
+      <td><%= ticket.message %></td>
+      <td><%= ticket.status %></td>
+      <td>
+        <%= link "Show", to: Routes.ticket_path(@conn, :show, ticket),  class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: Routes.ticket_path(@conn, :edit, ticket),  class: "btn btn-default btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Ticket", to: Routes.ticket_path(@conn, :new) %></span>
