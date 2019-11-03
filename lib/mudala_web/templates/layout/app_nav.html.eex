@@ -14,7 +14,21 @@
     <div class="collapse navbar-collapse" id="primary-nav">
       <ul class="nav navbar-nav">
           <li><%= link "Fruits", to:  "/categories/fruits" %></li>
-        <li><%= link "Vegetables", to: "/categories/vegetables" %></li>
+          <li><%= link "Vegetables", to: "/categories/vegetables" %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i> I18n<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="<%= get_active_locale_class("en") %>">
+                <a href="?locale=en">English</a>
+              </li>
+              <li class="<%= get_active_locale_class("fr") %>">
+                <a href="?locale=fr">Français</a>
+              </li>
+              <li class="<%= get_active_locale_class("de") %>">
+                <a href="?locale=de">Deutsche</a>
+              </li>
+            </ul>
+          </li>
       </ul>
       <!-- add code from here -->
       <ul class="nav navbar-nav navbar-right">

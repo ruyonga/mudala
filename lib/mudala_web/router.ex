@@ -17,6 +17,7 @@ defmodule MudalaWeb.Router do
     # Add plugs related to frontend
     plug MudalaWeb.Plugs.LoadCustomer
     plug MudalaWeb.Plug.FetchCart
+    plug MudalaWeb.Plugs.Locale
   end
 
   # Unauthenticated scope
