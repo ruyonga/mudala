@@ -9,5 +9,8 @@ defmodule MudalaWeb.LayoutView do
     """
   end
 
+  def get_active_locale_class(locale) do
+    if Gettext.get_locale(MudalaWeb.Gettext) == locale, do: "active"
+  end
 
 end
