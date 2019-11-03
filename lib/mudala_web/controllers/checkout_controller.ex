@@ -14,6 +14,7 @@ defmodule MudalaWeb.CheckoutController do
     order_params = associate_user_from_session(conn, order_params)
 
     case Sales.confirm_order(order, order_params) do
+
       {:ok, _} ->
           conn
           |> put_flash(:info, "You order has been confirmed. ")
@@ -26,7 +27,7 @@ defmodule MudalaWeb.CheckoutController do
 
   def associate_user_from_session(conn, params) do
     customer = conn.assigns.current_customer
-
+IO.inspect(customer)
     params
     |> Map.put("customer_id", customer.id)
     |> Map.put("customer_name", customer.name)
