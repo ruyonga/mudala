@@ -35,6 +35,7 @@ defmodule MudalaWeb.Router do
     post "/cart", CartController, :add
     patch "/cart", CartController, :update
     put "/cart", CartController, :update
+
   end
 
 
@@ -45,6 +46,8 @@ defmodule MudalaWeb.Router do
     get "/logout", SessionController, :delete
     get "/checkout", CheckoutController, :edit
     put "/checkout/confirm", CheckoutController, :update
+    get "/myorders", OrdersController, :index
+    get "/myorders/:id", OrdersController, :show
 
   end
 
