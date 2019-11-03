@@ -2,6 +2,7 @@ defmodule Mudala.CRM.Customer do
   use Ecto.Schema
   import Ecto.Changeset
   alias Mudala.CRM.Customer
+  alias Mudala.Ticket
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "customers" do
@@ -11,7 +12,7 @@ defmodule Mudala.CRM.Customer do
     field :password_hash, :string
     field :phone, :string
     field :residence_area, :string
-
+    has_many :tickets, Ticket
     timestamps()
   end
 

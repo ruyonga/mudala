@@ -48,6 +48,7 @@ defmodule MudalaWeb.Router do
     put "/checkout/confirm", CheckoutController, :update
     get "/myorders", OrdersController, :index
     get "/myorders/:id", OrdersController, :show
+    resources "/tickets", TicketController
 
   end
 
