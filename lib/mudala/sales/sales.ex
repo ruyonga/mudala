@@ -51,13 +51,10 @@ defmodule Mudala.Sales do
   end
 
   def get_orders(customer_id) do
-IO.inspect(customer_id)
+    IO.inspect(customer_id)
     Order
     |> Repo.get_by(customer_id: customer_id)
-    |> Enum.reduce([], fn order,x  ->
-                x ++  order.line_items
-
-          end)
+    |> IO.inspect()
 
   end
 end
