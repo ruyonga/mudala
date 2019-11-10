@@ -6,6 +6,7 @@ defmodule MudalaWeb.Admin.UserController do
 
   def index(conn, _params) do
     users = Administration.list_users()
+
     conn
     |> put_layout("admin_app.html")
     |> render("index.html", users: users)

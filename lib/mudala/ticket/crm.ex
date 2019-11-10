@@ -38,12 +38,11 @@ defmodule Mudala.Ticket.CRM do
       ** (Ecto.NoResultsError)
 
   """
-  def get_customer_ticket!(customer, id)  do
+  def get_customer_ticket!(customer, id) do
     customer
     |> Ecto.assoc(:tickets)
     |> Repo.get!(id)
   end
-
 
   @doc """
   Creates a ticket.

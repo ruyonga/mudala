@@ -104,6 +104,6 @@ defmodule Mudala.Administration do
 
   def get_admin_by_email(email) do
     User
-      |> Repo.get_by(email: email)
+    |> Repo.get_by(email: email)
   end
 end

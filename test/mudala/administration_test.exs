@@ -7,7 +7,11 @@ defmodule Mudala.AdministrationTest do
     alias Mudala.Administration.User
 
     @valid_attrs %{email: "some email", name: "some name", phone: "some phone"}
-    @update_attrs %{email: "some updated email", name: "some updated name", phone: "some updated phone"}
+    @update_attrs %{
+      email: "some updated email",
+      name: "some updated name",
+      phone: "some updated phone"
+    }
     @invalid_attrs %{email: nil, name: nil, phone: nil}
 
     def user_fixture(attrs \\ %{}) do

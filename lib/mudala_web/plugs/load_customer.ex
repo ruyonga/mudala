@@ -2,7 +2,6 @@ defmodule MudalaWeb.Plugs.LoadCustomer do
   import Plug.Conn
   alias Mudala.CRM
 
-
   def init(_opts), do: nil
 
   def call(%Plug.Conn{} = conn, _opts) do
@@ -11,5 +10,4 @@ defmodule MudalaWeb.Plugs.LoadCustomer do
 
     assign(conn, :current_customer, customer)
   end
-
 end

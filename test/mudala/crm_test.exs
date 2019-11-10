@@ -7,7 +7,11 @@ defmodule Mudala.CRMTest do
     alias Mudala.CRM.Ticket
 
     @valid_attrs %{message: "some message", status: "some status", subject: "some subject"}
-    @update_attrs %{message: "some updated message", status: "some updated status", subject: "some updated subject"}
+    @update_attrs %{
+      message: "some updated message",
+      status: "some updated status",
+      subject: "some updated subject"
+    }
     @invalid_attrs %{message: nil, status: nil, subject: nil}
 
     def ticket_fixture(attrs \\ %{}) do

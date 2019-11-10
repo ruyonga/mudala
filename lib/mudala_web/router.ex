@@ -12,8 +12,10 @@ defmodule MudalaWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+
   pipeline :admin do
     plug MudalaWeb.Plugs.AdminLayout
+    plug MudalaWeb.Plugs.LoadAdmin
   end
 
   pipeline :frontend do
@@ -39,9 +41,7 @@ defmodule MudalaWeb.Router do
     post "/cart", CartController, :add
     patch "/cart", CartController, :update
     put "/cart", CartController, :update
-
   end
-
 
   # Authenticated scope
   scope "/", MudalaWeb do
@@ -53,16 +53,21 @@ defmodule MudalaWeb.Router do
     get "/myorders", OrdersController, :index
     get "/myorders/:id", OrdersController, :show
     resources "/tickets", TicketController
-
   end
-  #Admin user
+
+  # Admin user
+  scope "/admin", MudalaWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin, MudalaWeb.Plugs.AuthenticateAdmin]
+    resources "/users", UserController
+  end
+
+  # Unauthenticated Admin user
   scope "/admin", MudalaWeb.Admin, as: :admin do
     pipe_through [:browser, :admin]
-
-    resources "/users", UserController
     get "/login", SessionController, :new
     post "/sendlink", SessionController, :send_link
     get "/magiclink", SessionController, :create
+    get "/logout", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.

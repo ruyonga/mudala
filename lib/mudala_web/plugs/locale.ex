@@ -5,11 +5,14 @@ defmodule MudalaWeb.Plugs.Locale do
 
   def call(conn, opts) do
     case conn.params["locale"] || get_session(conn, :locale) do
-      nil -> conn
+      nil ->
+        conn
+
       locale ->
         Gettext.put_locale(MudalaWeb.Gettext, locale)
+
         conn
-          |> put_session(:locale, locale)
+        |> put_session(:locale, locale)
     end
   end
 end

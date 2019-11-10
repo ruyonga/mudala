@@ -4,7 +4,11 @@ defmodule MudalaWeb.TicketControllerTest do
   alias Mudala.CRM
 
   @create_attrs %{message: "some message", status: "some status", subject: "some subject"}
-  @update_attrs %{message: "some updated message", status: "some updated status", subject: "some updated subject"}
+  @update_attrs %{
+    message: "some updated message",
+    status: "some updated status",
+    subject: "some updated subject"
+  }
   @invalid_attrs %{message: nil, status: nil, subject: nil}
 
   def fixture(:ticket) do
@@ -75,6 +79,7 @@ defmodule MudalaWeb.TicketControllerTest do
     test "deletes chosen ticket", %{conn: conn, ticket: ticket} do
       conn = delete(conn, Routes.ticket_path(conn, :delete, ticket))
       assert redirected_to(conn) == Routes.ticket_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.ticket_path(conn, :show, ticket))
       end

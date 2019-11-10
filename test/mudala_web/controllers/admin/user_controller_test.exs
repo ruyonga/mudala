@@ -4,7 +4,11 @@ defmodule MudalaWeb.Admin.UserControllerTest do
   alias Mudala.Administration
 
   @create_attrs %{email: "some email", name: "some name", phone: "some phone"}
-  @update_attrs %{email: "some updated email", name: "some updated name", phone: "some updated phone"}
+  @update_attrs %{
+    email: "some updated email",
+    name: "some updated name",
+    phone: "some updated phone"
+  }
   @invalid_attrs %{email: nil, name: nil, phone: nil}
 
   def fixture(:user) do
@@ -75,6 +79,7 @@ defmodule MudalaWeb.Admin.UserControllerTest do
     test "deletes chosen user", %{conn: conn, user: user} do
       conn = delete(conn, Routes.admin_user_path(conn, :delete, user))
       assert redirected_to(conn) == Routes.admin_user_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.admin_user_path(conn, :show, user))
       end

@@ -11,13 +11,14 @@ defmodule MudalaWeb.TicketController do
   end
 
   def new(conn, _params) do
-    customer  = conn.assigns.current_customer
+    customer = conn.assigns.current_customer
     changeset = CRM.build_customer_ticket(customer)
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"ticket" => ticket_params}) do
     customer = conn.assigns.current_customer
+
     case CRM.create_customer_ticket(customer, ticket_params) do
       {:ok, ticket} ->
         conn

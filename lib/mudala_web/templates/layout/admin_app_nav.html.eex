@@ -13,6 +13,7 @@
       <ul class="nav navbar-nav">
       <ul class="nav navbar-nav">
         <li><%= link "Admin Users", to: Routes.admin_user_path(@conn, :index) %></li>
+        <li><%= link "Logout", to: Routes.admin_session_path(@conn, :delete) %></li>
       </ul>
       </ul>
     </div>

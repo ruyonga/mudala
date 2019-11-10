@@ -5,7 +5,7 @@ defmodule MudalaWeb.RegistrationController do
 
   def new(conn, _) do
     changeset = CRM.build_customer()
-    residence_areas = Places.ResidenceService.list_areas
+    residence_areas = Places.ResidenceService.list_areas()
     render(conn, "new.html", changeset: changeset, residence_areas: residence_areas)
   end
 
@@ -17,7 +17,8 @@ defmodule MudalaWeb.RegistrationController do
         |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, changeset} ->
-        residence_areas = Places.ResidenceService.list_areas
+        residence_areas = Places.ResidenceService.list_areas()
+
         conn
         |> render(:new, changeset: changeset, residence_areas: residence_areas)
     end
