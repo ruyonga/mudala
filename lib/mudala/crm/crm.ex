@@ -28,4 +28,6 @@ defmodule Mudala.CRM do
   end
 
   def get_customer(id), do: Repo.get(Customer, id)
+
+  def get_all_customers(), do: Repo.all(Customer)
 end

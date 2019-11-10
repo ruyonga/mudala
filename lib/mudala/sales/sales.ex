@@ -36,9 +36,17 @@ defmodule Mudala.Sales do
     |> Repo.get_by(id: id, status: "In Cart")
   end
 
-  def get_order(customer_id) do
-    # Order
-    #  |> Repo.get_by(id: id)
+  def get_order() do
+     Order
+     |> Repo.all()
+     |> Enum.map(fn x ->
+       x
+       |> Map.from_struct()
+       |> Map.drop([:__meta__])
+
+
+     end)
+     |> IO.inspect()
   end
 
   def create_cart do
@@ -48,17 +56,13 @@ defmodule Mudala.Sales do
 
   def confirm_order(%Order{} = order, attrs) do
     attrs = Map.put(attrs, "status", "Confirmed")
-
     order
     |> Order.checkout_changeset(attrs)
     |> Repo.update()
   end
 
   def get_orders(customer_id) do
-    IO.inspect(customer_id)
-
     Order
     |> Repo.get_by(customer_id: customer_id)
-    |> IO.inspect()
   end
 end

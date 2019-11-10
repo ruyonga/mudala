@@ -59,6 +59,8 @@ defmodule MudalaWeb.Router do
   scope "/admin", MudalaWeb.Admin, as: :admin do
     pipe_through [:browser, :admin, MudalaWeb.Plugs.AuthenticateAdmin]
     resources "/users", UserController
+    get "/orders", OrdersController, :index
+    get "/customers", CustomerController, :index
   end
 
   # Unauthenticated Admin user
